@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Task Management App</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>Task Management App</h1>
+
+    <div>
+        <h2>Task List</h2>
+
+        <div>
+            <label>Show:
+                <input type="radio" v-model="showCompleted" value="all">All
+                <input type="radio" v-model="showCompleted" value="incomplete">Incomplete
+                <input type="radio" v-model="showCompleted" value="completed">Completed
+            </label>
+        </div>
+
+        <ul>
+            <li v-for="task in filteredTasks" :key="task.id">
+                <span :class="{ completed: task.completed }">{{ task.title }}</span>
+                <button @click="toggleCompletion(task.id)">{{ task.completed ? 'Incomplete' : 'Complete' }}</button>
+            </li>
+        </ul>
+
+        <div>
+            <h3>Add New Task</h3>
+            <form @submit.prevent="addTask">
+                <label>Title:
+                    <input v-model="newTask.title" required>
+                </label>
+                <label>Completed:
+                    <input type="checkbox" v-model="newTask.completed">
+                </label>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+
+        <div>
+            <h3>Task Statistics</h3>
+            <p>Total Incomplete Tasks: {{ incompleteTaskCount }}</p>
+            <p>Total Completed Tasks: {{ completedTaskCount }}</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="app.js"></script>
+</body>
+</html>

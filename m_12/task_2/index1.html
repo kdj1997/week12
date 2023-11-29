@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>User Profile Dashboard</title>
+</head>
+<body>
+
+<div id="app">
+  <h1>User Profile Dashboard</h1>
+
+  <div>
+    <img :src="user.profilePicture" alt="Profile Picture" class="profile-picture">
+
+    <div>
+      <h2>{{ user.name }}</h2>
+      <p>Email: {{ user.email }}</p>
+
+      <div v-if="user.isAdmin">
+        <p>Welcome, Admin!</p>
+      </div>
+      <div v-else>
+        <p>Welcome, User!</p>
+      </div>
+
+      <p>Age: {{ userAge }}</p>
+
+      <h3>Edit Profile</h3>
+      <form @submit.prevent="updateProfile">
+        <label>Name:
+          <input v-model="user.name" required>
+        </label>
+        <label>Email:
+          <input v-model="user.email" type="email" required>
+        </label>
+        <label>Birthdate:
+          <input v-model="user.birthdate" type="date" required>
+        </label>
+        <label>Profile Picture URL:
+          <input v-model="user.profilePicture" type="url">
+        </label>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="app1.js"></script>
+</body>
+</html>
